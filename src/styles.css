@@ -1,0 +1,279 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #efe8de;
+  --color-surface: #f7f1e8;
+  --color-elevated: #fffaf4;
+  --color-fg: #2a181c;
+  --color-muted: #8a7378;
+  --color-subtle: #b4a097;
+  --color-accent: #6e3844;
+  --color-accent-fg: #fbf6ef;
+  --color-ink: #1c1013;
+  --color-border: #e4d8cc;
+  --color-glass: #f7f1e8cc;
+  --color-tab: #f3ece3d9;
+  --color-ring: #6e384466;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "SF Pro Text", "Segoe UI", sans-serif;
+  --font-display: "Cormorant Garamond", "Iowan Old Style", Palatino, Georgia,
+    serif;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 36px;
+
+  --shadow-border:
+    0 0 0 1px rgb(42 24 28 / 0.06), 0 1px 2px -1px rgb(42 24 28 / 0.06),
+    0 8px 24px -12px rgb(42 24 28 / 0.18);
+  --shadow-border-hover:
+    0 0 0 1px rgb(42 24 28 / 0.08), 0 1px 2px -1px rgb(42 24 28 / 0.08),
+    0 16px 32px -16px rgb(42 24 28 / 0.22);
+  --shadow-glass:
+    0 0 0 0.5px rgb(255 250 244 / 0.55), 0 8px 30px -18px rgb(42 24 28 / 0.35);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    min-height: 100dvh;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  img {
+    outline: 1px solid color-mix(in oklab, var(--color-fg) 10%, transparent);
+    outline-offset: -1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* iOS materials */
+.fh-glass {
+  background: var(--color-glass);
+  backdrop-filter: saturate(180%) blur(28px);
+  -webkit-backdrop-filter: saturate(180%) blur(28px);
+  box-shadow: var(--shadow-glass);
+}
+
+.fh-tabbar {
+  background: var(--color-tab);
+  backdrop-filter: saturate(190%) blur(32px);
+  -webkit-backdrop-filter: saturate(190%) blur(32px);
+  box-shadow:
+    0 -0.5px 0 color-mix(in oklab, var(--color-fg) 12%, transparent),
+    0 -12px 32px -24px rgb(42 24 28 / 0.35);
+}
+
+.fh-photo {
+  outline: 1px solid color-mix(in oklab, var(--color-fg) 10%, transparent);
+  outline-offset: -1px;
+}
+
+.fh-card {
+  box-shadow: var(--shadow-border);
+  transition-property: box-shadow, transform;
+  transition-duration: 220ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fh-card:hover {
+  box-shadow: var(--shadow-border-hover);
+}
+
+.fh-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(4px);
+  transition-property: opacity, transform, filter;
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fh-reveal-in {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.fh-page {
+  animation: fh-page-in 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.fh-hero-ken {
+  animation: fh-ken 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.fh-shine::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 40%,
+    rgb(255 250 244 / 0.18) 48%,
+    transparent 56%
+  );
+  transform: translateX(-120%);
+  animation: fh-shine 7s ease-in-out 1.2s infinite;
+}
+
+.fh-marquee-track {
+  animation: fh-marquee 32s linear infinite;
+  width: max-content;
+}
+
+.fh-badge-pop {
+  animation: fh-badge 500ms cubic-bezier(0.34, 1.36, 0.64, 1) both;
+}
+
+.fh-segmented {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--color-fg) 6%, var(--color-surface));
+}
+
+.fh-segment {
+  flex: 1;
+  min-height: 34px;
+  border-radius: 12px;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-muted);
+  transition-property: background-color, color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fh-segment-on {
+  background: var(--color-elevated);
+  color: var(--color-fg);
+  box-shadow: 0 1px 2px rgb(42 24 28 / 0.08), 0 0 0 0.5px rgb(42 24 28 / 0.04);
+}
+
+@keyframes fh-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fh-ken {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes fh-shine {
+  0%,
+  55% {
+    transform: translateX(-120%);
+  }
+  75%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes fh-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fh-badge {
+  from {
+    transform: scale(0.6);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fh-word {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+.fh-word {
+  display: inline-block;
+  animation: fh-word 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fh-page,
+  .fh-hero-ken,
+  .fh-shine::after,
+  .fh-marquee-track,
+  .fh-badge-pop,
+  .fh-word,
+  .fh-reveal {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+.fh-toast {
+  font-family: var(--font-sans) !important;
+  border-radius: 16px !important;
+  background: color-mix(in oklab, var(--color-elevated) 86%, transparent) !important;
+  backdrop-filter: blur(20px) saturate(160%);
+  color: var(--color-fg) !important;
+  border: 0.5px solid color-mix(in oklab, var(--color-fg) 10%, transparent) !important;
+  box-shadow: var(--shadow-border) !important;
+}
