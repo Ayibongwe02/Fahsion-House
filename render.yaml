@@ -1,0 +1,16 @@
+# Render Blueprint — Docker web service.
+# Create a Blueprint at https://dashboard.render.com and point it at this file.
+services:
+  - type: web
+    name: fashion-house
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: NITRO_PRESET
+        value: node-server
